@@ -1,0 +1,9 @@
+[gd_resource type="ProjectSettings" load_steps=2 format=3]
+
+[application]
+config/name="GodOfWarLite"
+config/description="GodOfWar-like minimal prototype made for you"
+run/main_scene="res://scenes/Main.tscn"
+
+[input]
+joy_vibration = []
