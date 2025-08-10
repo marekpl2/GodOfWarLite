@@ -1,0 +1,28 @@
+name: Build Godot Windows
+
+on:
+  workflow_dispatch: # pozwala uruchomić ręcznie z Actions
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - - name: Pobierz Godot
+  run: |
+    wget https://github.com/godotengine/godot/releases/download/4.4.1/Godot_v4.4.1-stable_linux.x86_64.zip
+    unzip Godot_v4.4.1-stable_linux.x86_64.zip -d godot
+    mv godot/* godot-bin
+    chmod +x godot-bin
+
+      - name: Export game for Windows
+        run: |
+          ./godot-bin --headless --export-release "Windows Desktop" build/GodOfWarLite.exe
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GodOfWarLite-Windows
+          path: build/GodOfWarLite.exe
